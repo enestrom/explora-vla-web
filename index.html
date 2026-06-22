@@ -772,6 +772,17 @@
       else if(e.key==='ArrowLeft')show(idx-1);
     });
   })();
+
+  // GA4: trackear clics a WhatsApp como CTA de conversión
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="wa.me"]');
+    if(!a||typeof gtag!=='function')return;
+    var label=(a.getAttribute('aria-label')||a.textContent||'').trim().replace(/\s+/g,' ').slice(0,100);
+    gtag('event','whatsapp_click',{
+      link_url:a.href,
+      link_text:label||'(sin texto)'
+    });
+  });
 </script>
 
 </body>
